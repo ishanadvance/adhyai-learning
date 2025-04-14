@@ -97,17 +97,17 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   };
   
   const renderStep1 = () => (
-    <div id="step1" className="min-h-screen flex flex-col p-6">
+    <div id="step1" className="min-h-screen flex flex-col p-6 bg-gray-900">
       <div className="mb-8 text-center">
         <div className="h-16 bg-primary text-white flex items-center justify-center rounded-lg mb-4">
           <h1 className="text-2xl font-bold">Adhyai</h1>
         </div>
-        <h1 className="text-3xl font-bold font-heading text-primary">Welcome to Adhyai!</h1>
-        <p className="text-neutral-600 mt-2">Let's personalize your learning journey</p>
+        <h1 className="text-3xl font-bold font-heading text-blue-400">Welcome to Adhyai!</h1>
+        <p className="text-white mt-2">Let's personalize your learning journey</p>
       </div>
 
       <div className="flex-1 flex flex-col justify-center">
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-gray-800 rounded-xl border border-gray-700 shadow-md p-6 mb-6">
           <Form {...form}>
             <form onSubmit={(e) => { e.preventDefault(); handleStep1Submit(); }} className="space-y-4">
               <FormField
@@ -115,7 +115,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-700 font-medium">Your Name</FormLabel>
+                    <FormLabel className="text-white font-medium">Your Name</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="e.g., Aarav" 
@@ -133,7 +133,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-700 font-medium">Username</FormLabel>
+                    <FormLabel className="text-white font-medium">Username</FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Choose a username" 
@@ -151,7 +151,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-700 font-medium">Password</FormLabel>
+                    <FormLabel className="text-white font-medium">Password</FormLabel>
                     <FormControl>
                       <Input 
                         type="password"
@@ -173,7 +173,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 name="grade"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-700 font-medium">Your Grade</FormLabel>
+                    <FormLabel className="text-white font-medium">Your Grade</FormLabel>
                     <Select 
                       defaultValue={field.value}
                       onValueChange={field.onChange}
@@ -228,7 +228,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
 
               <Button 
                 type="submit" 
-                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                className="w-full bg-primary hover:bg-primary/80 text-white font-bold py-3 px-4 rounded-lg transition duration-200 border border-white"
               >
                 Sign Up
               </Button>
@@ -245,22 +245,22 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
             variant="outline"
             onClick={handleGoogleSignUp}
             disabled={isGoogleLoading}
-            className="w-full flex items-center justify-center gap-2 border border-neutral-300 py-3 px-4 rounded-lg hover:bg-neutral-50"
+            className="w-full flex items-center justify-center gap-2 border border-white py-3 px-4 rounded-lg hover:bg-gray-800 text-white"
           >
             {isGoogleLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <SiGoogle className="h-4 w-4 text-primary" />
+              <SiGoogle className="h-4 w-4 text-blue-400" />
             )}
             Sign up with Google
           </Button>
           
           <div className="text-center mt-6">
-            <p className="text-neutral-600 text-sm">
+            <p className="text-white text-sm">
               Already have an account?{' '}
               <button 
                 onClick={handleLoginClick}
-                className="text-primary font-medium hover:underline"
+                className="text-blue-400 font-medium hover:underline"
               >
                 Sign In
               </button>
@@ -268,8 +268,8 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
           </div>
         </div>
 
-        <div className="text-center text-neutral-500 text-sm mt-4">
-          <p>By continuing, you accept our <a href="#" className="text-primary">Terms</a> and <a href="#" className="text-primary">Privacy Policy</a></p>
+        <div className="text-center text-white text-sm mt-4">
+          <p>By continuing, you accept our <a href="#" className="text-blue-400">Terms</a> and <a href="#" className="text-blue-400">Privacy Policy</a></p>
         </div>
       </div>
     </div>

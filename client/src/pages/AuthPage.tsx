@@ -116,13 +116,13 @@ export default function AuthPage() {
               <h1 className="text-2xl font-bold">Adhyai</h1>
             </div>
             <h1 className="text-3xl font-bold font-heading text-primary">Welcome Back!</h1>
-            <p className="text-neutral-600 mt-2">Continue your learning journey</p>
+            <p className="text-gray-300 mt-2">Continue your learning journey</p>
           </div>
 
           <Tabs defaultValue="student" className="mb-6">
-            <TabsList className="grid w-full grid-cols-2 mb-4">
-              <TabsTrigger value="student">Student Login</TabsTrigger>
-              <TabsTrigger value="parent">Parent Login</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 mb-4 bg-gray-700">
+              <TabsTrigger value="student" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Student Login</TabsTrigger>
+              <TabsTrigger value="parent" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">Parent Login</TabsTrigger>
             </TabsList>
             
             <TabsContent value="student">
@@ -141,12 +141,12 @@ export default function AuthPage() {
                         name="username"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">Username</FormLabel>
+                            <FormLabel className="text-white font-medium">Username</FormLabel>
                             <FormControl>
                               <Input 
                                 placeholder="Enter your username" 
                                 {...field} 
-                                className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                               />
                             </FormControl>
                             <FormMessage />
@@ -159,16 +159,16 @@ export default function AuthPage() {
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">Password</FormLabel>
+                            <FormLabel className="text-white font-medium">Password</FormLabel>
                             <FormControl>
                               <Input 
                                 type="password"
                                 placeholder="Enter your password" 
                                 {...field} 
-                                className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                               />
                             </FormControl>
-                            <FormDescription className="text-xs">
+                            <FormDescription className="text-xs text-gray-300">
                               Password should be at least 6 characters long.
                             </FormDescription>
                             <FormMessage />
@@ -237,13 +237,13 @@ export default function AuthPage() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">Email</FormLabel>
+                            <FormLabel className="text-white font-medium">Email</FormLabel>
                             <FormControl>
                               <Input 
                                 type="email"
                                 placeholder="parent@example.com" 
                                 {...field} 
-                                className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                               />
                             </FormControl>
                             <FormMessage />
@@ -256,16 +256,16 @@ export default function AuthPage() {
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">Password</FormLabel>
+                            <FormLabel className="text-white font-medium">Password</FormLabel>
                             <FormControl>
                               <Input 
                                 type="password"
                                 placeholder="Enter your password" 
                                 {...field} 
-                                className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                               />
                             </FormControl>
-                            <FormDescription className="text-xs">
+                            <FormDescription className="text-xs text-gray-300">
                               Password should be at least 6 characters long.
                             </FormDescription>
                             <FormMessage />

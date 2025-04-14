@@ -160,7 +160,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                         className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                       />
                     </FormControl>
-                    <FormDescription className="text-xs">
+                    <FormDescription className="text-xs text-gray-300">
                       Password should be at least 6 characters long. Use a mix of letters and numbers for better security.
                     </FormDescription>
                     <FormMessage />
@@ -203,7 +203,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 name="language"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-neutral-700 font-medium">Preferred Language</FormLabel>
+                    <FormLabel className="text-white font-medium">Preferred Language</FormLabel>
                     <Select 
                       defaultValue={field.value}
                       onValueChange={field.onChange}
@@ -236,9 +236,9 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
           </Form>
           
           <div className="relative flex items-center w-full my-6">
-            <div className="flex-grow border-t border-neutral-300"></div>
-            <span className="mx-4 text-neutral-600 text-sm">or</span>
-            <div className="flex-grow border-t border-neutral-300"></div>
+            <div className="flex-grow border-t border-white/30"></div>
+            <span className="mx-4 text-white text-sm">or</span>
+            <div className="flex-grow border-t border-white/30"></div>
           </div>
           
           <Button 
@@ -276,18 +276,18 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   );
   
   const renderStep2 = () => (
-    <div id="step2" className="min-h-screen flex flex-col p-6">
+    <div id="step2" className="min-h-screen flex flex-col p-6 bg-gray-900">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold font-heading text-primary text-center">Let's set your learning goals</h1>
-        <p className="text-neutral-600 mt-2 text-center">We'll help you stay on track!</p>
+        <h1 className="text-2xl font-bold font-heading text-blue-400 text-center">Let's set your learning goals</h1>
+        <p className="text-white mt-2 text-center">We'll help you stay on track!</p>
       </div>
 
       <div className="flex-1 flex flex-col justify-center">
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-gray-800 rounded-xl border border-gray-700 shadow-md p-6 mb-6">
           <div className="mb-6">
-            <label className="block text-neutral-700 font-medium mb-3">Weekly Learning Goal</label>
-            <div className="p-4 bg-neutral-100 rounded-lg">
-              <p className="text-center font-heading font-bold text-xl text-primary">
+            <label className="block text-white font-medium mb-3">Weekly Learning Goal</label>
+            <div className="p-4 bg-gray-700 rounded-lg">
+              <p className="text-center font-heading font-bold text-xl text-blue-400">
                 {weeklyGoal} topics/week, 15 mins/day
               </p>
               <div className="mt-3">
@@ -299,7 +299,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                   onChange={(e) => setWeeklyGoal(parseInt(e.target.value))}
                   className="w-full accent-primary"
                 />
-                <div className="flex justify-between text-xs text-neutral-500 mt-1">
+                <div className="flex justify-between text-xs text-white mt-1">
                   <span>Beginner</span>
                   <span>Balanced</span>
                   <span>Advanced</span>
@@ -309,42 +309,42 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
           </div>
 
           <div className="mb-6">
-            <label className="block text-neutral-700 font-medium mb-3">Subject Focus</label>
+            <label className="block text-white font-medium mb-3">Subject Focus</label>
             <div className="grid grid-cols-2 gap-3">
               <button 
-                className={`p-4 rounded-lg border-2 ${subject === 'Mathematics' ? 'border-primary bg-primary bg-opacity-10' : 'border-neutral-300'} flex flex-col items-center`}
+                className={`p-4 rounded-lg border-2 ${subject === 'Mathematics' ? 'border-blue-400 bg-blue-900/30' : 'border-gray-600 bg-gray-700'} flex flex-col items-center`}
                 onClick={() => setSubject('Mathematics')}
               >
                 <span className="text-4xl mb-2">📐</span>
-                <span className={`font-medium ${subject === 'Mathematics' ? 'text-primary' : 'text-neutral-600'}`}>Mathematics</span>
+                <span className={`font-medium ${subject === 'Mathematics' ? 'text-blue-400' : 'text-white'}`}>Mathematics</span>
               </button>
               <button 
-                className={`p-4 rounded-lg border-2 ${subject === 'Science' ? 'border-primary bg-primary bg-opacity-10' : 'border-neutral-300'} flex flex-col items-center`}
+                className={`p-4 rounded-lg border-2 ${subject === 'Science' ? 'border-blue-400 bg-blue-900/30' : 'border-gray-600 bg-gray-700'} flex flex-col items-center`}
                 onClick={() => setSubject('Science')}
               >
                 <span className="text-4xl mb-2">🧪</span>
-                <span className={`font-medium ${subject === 'Science' ? 'text-primary' : 'text-neutral-600'}`}>Science</span>
+                <span className={`font-medium ${subject === 'Science' ? 'text-blue-400' : 'text-white'}`}>Science</span>
               </button>
               <button 
-                className={`p-4 rounded-lg border-2 ${subject === 'English' ? 'border-primary bg-primary bg-opacity-10' : 'border-neutral-300'} flex flex-col items-center`}
+                className={`p-4 rounded-lg border-2 ${subject === 'English' ? 'border-blue-400 bg-blue-900/30' : 'border-gray-600 bg-gray-700'} flex flex-col items-center`}
                 onClick={() => setSubject('English')}
               >
                 <span className="text-4xl mb-2">📚</span>
-                <span className={`font-medium ${subject === 'English' ? 'text-primary' : 'text-neutral-600'}`}>English</span>
+                <span className={`font-medium ${subject === 'English' ? 'text-blue-400' : 'text-white'}`}>English</span>
               </button>
               <button 
-                className={`p-4 rounded-lg border-2 ${subject === 'History' ? 'border-primary bg-primary bg-opacity-10' : 'border-neutral-300'} flex flex-col items-center`}
+                className={`p-4 rounded-lg border-2 ${subject === 'History' ? 'border-blue-400 bg-blue-900/30' : 'border-gray-600 bg-gray-700'} flex flex-col items-center`}
                 onClick={() => setSubject('History')}
               >
                 <span className="text-4xl mb-2">🏛️</span>
-                <span className={`font-medium ${subject === 'History' ? 'text-primary' : 'text-neutral-600'}`}>History</span>
+                <span className={`font-medium ${subject === 'History' ? 'text-blue-400' : 'text-white'}`}>History</span>
               </button>
             </div>
           </div>
 
           <Button 
             onClick={handleStep2Submit} 
-            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+            className="w-full bg-primary hover:bg-primary/80 text-white font-bold py-3 px-4 rounded-lg transition duration-200 border border-white"
           >
             Start Learning
           </Button>
@@ -352,7 +352,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
 
         <button 
           onClick={() => setStep(1)} 
-          className="text-center text-primary font-medium"
+          className="text-center text-blue-400 font-medium hover:underline mt-2"
         >
           Go Back
         </button>

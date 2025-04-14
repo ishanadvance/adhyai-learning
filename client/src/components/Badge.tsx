@@ -46,10 +46,10 @@ export function Badge({
       onClick={onClick}
     >
       <div className={`relative ${isLocked ? '' : 'badge-animation'}`}>
-        <div className={`${isLocked ? 'bg-neutral-200' : 'bg-accent'} rounded-full flex items-center justify-center ${sizeClasses[size].badge}`}>
-          <div className="bg-white rounded-full flex items-center justify-center ${sizeClasses[size].inner}">
+        <div className={`${isLocked ? 'bg-gray-500' : 'bg-blue-500'} rounded-full flex items-center justify-center ${sizeClasses[size].badge}`}>
+          <div className="bg-gray-800 rounded-full flex items-center justify-center ${sizeClasses[size].inner} border border-gray-700">
             {isLocked ? (
-              <span className="text-neutral-400">?</span>
+              <span className="text-gray-400">?</span>
             ) : (
               image ? (
                 <img 
@@ -58,7 +58,7 @@ export function Badge({
                   className={`${sizeClasses[size].img} rounded-full object-cover`} 
                 />
               ) : (
-                <div className={`${sizeClasses[size].img} rounded-full bg-neutral-100 flex items-center justify-center text-primary font-bold`}>
+                <div className={`${sizeClasses[size].img} rounded-full bg-gray-700 flex items-center justify-center text-blue-400 font-bold`}>
                   {name.charAt(0)}
                 </div>
               )
@@ -67,13 +67,13 @@ export function Badge({
         </div>
         
         {xpPoints && !isLocked && (
-          <div className={`absolute ${sizeClasses[size].xp} bg-primary rounded-full flex items-center justify-center text-white font-bold`}>
+          <div className={`absolute ${sizeClasses[size].xp} bg-blue-600 rounded-full flex items-center justify-center text-white font-bold border border-white`}>
             +{xpPoints}
           </div>
         )}
       </div>
       
-      <span className={`text-xs text-center mt-2 ${isLocked ? 'text-neutral-400' : ''}`}>
+      <span className={`text-xs text-center mt-2 ${isLocked ? 'text-gray-400' : 'text-white'}`}>
         {isLocked ? 'Locked' : name}
       </span>
     </div>

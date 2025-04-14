@@ -13,8 +13,8 @@ export function StreakCalendar({ currentStreak, className = '' }: StreakCalendar
   const adjustedToday = today === 0 ? 6 : today - 1;
   
   return (
-    <div className={`bg-white rounded-xl shadow-sm p-5 ${className}`}>
-      <h2 className="font-heading font-medium text-lg mb-4">Your Learning Streak</h2>
+    <div className={`bg-gray-800 rounded-xl shadow-md border border-gray-700 p-5 ${className}`}>
+      <h2 className="font-heading font-medium text-lg mb-4 text-white">Your Learning Streak</h2>
       <div className="flex justify-between mb-2">
         {days.map((day, index) => {
           const isToday = index === adjustedToday;
@@ -22,23 +22,23 @@ export function StreakCalendar({ currentStreak, className = '' }: StreakCalendar
           const isStreak = isPast && index >= (adjustedToday - currentStreak + 1);
           
           return (
-            <div key={day} className="flex flex-col items-center">
+            <div key={day + '-' + index} className="flex flex-col items-center">
               <div 
                 className={`w-10 h-10 rounded-full flex items-center justify-center mb-1
-                  ${isToday ? 'bg-accent' : isStreak ? 'bg-accent bg-opacity-20' : 'bg-neutral-200'}
+                  ${isToday ? 'bg-blue-500' : isStreak ? 'bg-blue-900' : 'bg-gray-700'}
                   ${isToday ? 'streak-flame' : ''}
                 `}
               >
-                <span className={`font-medium ${isToday ? 'text-white' : isStreak ? 'text-accent' : 'text-neutral-400'}`}>
+                <span className={`font-medium ${isToday ? 'text-white' : isStreak ? 'text-blue-400' : 'text-gray-400'}`}>
                   {day}
                 </span>
               </div>
-              <span className="text-xs text-neutral-500">{index + 1}</span>
+              <span className="text-xs text-gray-300">{index + 1}</span>
             </div>
           );
         })}
       </div>
-      <p className="text-center text-sm text-neutral-600 mt-2">
+      <p className="text-center text-sm text-gray-300 mt-2">
         You're on a {currentStreak}-day streak! {currentStreak > 0 ? '🔥' : ''}
       </p>
     </div>

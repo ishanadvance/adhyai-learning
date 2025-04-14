@@ -102,13 +102,13 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow-sm p-4">
+      <header className="bg-gray-800 shadow-md p-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="font-heading font-bold text-lg">Hello, {user.name}!</h1>
-            <p className="text-neutral-500 text-sm">Grade {user.grade} • {user.currentSubject} Focus</p>
+            <h1 className="font-heading font-bold text-lg text-white">Hello, {user.name}!</h1>
+            <p className="text-gray-300 text-sm">Grade {user.grade} • {user.currentSubject} Focus</p>
           </div>
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold border border-white">
             {user.name.charAt(0)}
           </div>
         </div>
@@ -152,8 +152,8 @@ export default function Dashboard() {
         />
 
         {/* Progress overview */}
-        <div className="bg-white rounded-xl shadow-sm p-5 mb-6">
-          <h2 className="font-heading font-medium text-lg mb-4">Your Progress</h2>
+        <div className="bg-gray-800 rounded-xl shadow-md border border-gray-700 p-5 mb-6">
+          <h2 className="font-heading font-medium text-lg text-white mb-4">Your Progress</h2>
           
           {topics.map((topic: any) => {
             const topicProgress = userProgress?.find((p: any) => p.topicId === topic.id);
@@ -162,23 +162,23 @@ export default function Dashboard() {
             return (
               <div key={topic.id} className="mb-4">
                 <div className="flex justify-between mb-1">
-                  <span className="font-medium">{topic.name}</span>
+                  <span className="font-medium text-white">{topic.name}</span>
                   {topic.isLocked ? (
-                    <span className="text-neutral-500">Locked</span>
+                    <span className="text-gray-400">Locked</span>
                   ) : topicProgress ? (
-                    <span className="text-success">{masteryPercentage}% Mastery</span>
+                    <span className="text-green-400">{masteryPercentage}% Mastery</span>
                   ) : (
-                    <span className="text-neutral-500">0% Mastery</span>
+                    <span className="text-gray-300">0% Mastery</span>
                   )}
                 </div>
-                <div className="w-full bg-neutral-200 rounded-full h-2.5">
+                <div className="w-full bg-gray-600 rounded-full h-2.5">
                   <div 
                     className={`h-2.5 rounded-full ${
                       topic.isLocked 
-                        ? 'bg-neutral-400' 
+                        ? 'bg-gray-500' 
                         : topicProgress 
-                          ? 'bg-success' 
-                          : 'bg-primary'
+                          ? 'bg-green-500' 
+                          : 'bg-blue-500'
                     }`} 
                     style={{ width: `${topic.isLocked ? 0 : masteryPercentage}%` }}
                   />
@@ -189,10 +189,10 @@ export default function Dashboard() {
         </div>
 
         {/* Badges collection */}
-        <div className="bg-white rounded-xl shadow-sm p-5 mb-6">
+        <div className="bg-gray-800 rounded-xl shadow-md border border-gray-700 p-5 mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-heading font-medium text-lg">Your Badges</h2>
-            <a href="#" className="text-primary text-sm font-medium">See all</a>
+            <h2 className="font-heading font-medium text-lg text-white">Your Badges</h2>
+            <button className="text-blue-400 text-sm font-medium hover:underline">See all</button>
           </div>
           
           <div className="grid grid-cols-3 gap-4">

@@ -6,9 +6,12 @@ import { useUser } from '@/context/UserContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
 import { useLocation } from 'wouter';
 import { FractionIcon, DecimalIcon, PercentageIcon } from '@/lib/icons';
+import { SiGoogle } from 'react-icons/si';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const userInfoSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -28,6 +31,8 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   const [step, setStep] = useState(1);
   const { register } = useUser();
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   
   const [weeklyGoal, setWeeklyGoal] = useState(3); // Default: 3 topics per week
   const [subject, setSubject] = useState('Mathematics'); // Default: Mathematics
@@ -137,6 +142,9 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                         className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                       />
                     </FormControl>
+                    <FormDescription className="text-xs">
+                      Password should be at least 6 characters long. Use a mix of letters and numbers for better security.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

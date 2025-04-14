@@ -33,6 +33,9 @@ interface RegisterUser {
   grade: number;
   language: string;
   parentContact?: string;
+  weeklyGoalTopics?: number;
+  weeklyGoalMinutes?: number;
+  currentSubject?: string;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);

@@ -9,11 +9,13 @@ import DiagnosticTest from "./pages/DiagnosticTest";
 import LearningSession from "./pages/LearningSession";
 import CompletionScreen from "./pages/CompletionScreen";
 import Dashboard from "./pages/Dashboard";
+import AuthPage from "./pages/AuthPage";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Onboarding} />
+      <Route path="/auth" component={AuthPage} />
       <Route path="/diagnostic/:topicId" component={DiagnosticTest} />
       <Route path="/learning/:topicId" component={LearningSession} />
       <Route path="/completion/:sessionId" component={CompletionScreen} />

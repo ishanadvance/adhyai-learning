@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary-light: #6C8EFF;
+  --primary: #4361EE;
+  --primary-dark: #2940B3;
+  
+  --secondary-light: #FF8A8A;
+  --secondary: #FF6B6B;
+  --secondary-dark: #E54B4B;
+  
+  --accent-light: #FFE299;
+  --accent: #FFD166;
+  --accent-dark: #EABD4D;
+  
+  --success: #4CAF50;
+  --error: #F44336;
+  --warning: #FFC107;
+  
+  --neutral-100: #F8F9FA;
+  --neutral-200: #E9ECEF;
+  --neutral-300: #DEE2E6;
+  --neutral-400: #CED4DA;
+  --neutral-500: #ADB5BD;
+  --neutral-600: #6C757D;
+  --neutral-700: #495057;
+  --neutral-800: #343A40;
+  --neutral-900: #212529;
+}

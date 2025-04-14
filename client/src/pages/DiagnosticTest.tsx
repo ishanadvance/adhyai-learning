@@ -78,10 +78,12 @@ export default function DiagnosticTest() {
     setDiagnosticComplete(true);
     
     // Create user progress
-    createProgressMutation.mutate({
-      topicId: parseInt(topicId),
-      masteryPercentage
-    });
+    if (topicId) {
+      createProgressMutation.mutate({
+        topicId: parseInt(topicId),
+        masteryPercentage
+      });
+    }
   };
   
   const handleStartLearning = () => {
@@ -122,15 +124,15 @@ export default function DiagnosticTest() {
   }
   
   const renderDiagnosticTest = () => (
-    <div className="min-h-screen flex flex-col p-6">
+    <div className="min-h-screen flex flex-col p-6 bg-gray-900">
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold font-heading text-primary">Let's check your knowledge</h1>
-        <p className="text-neutral-600 mt-2">Quick 3-question diagnostic on {topic.name}</p>
+        <h1 className="text-2xl font-bold font-heading text-blue-400">Let's check your knowledge</h1>
+        <p className="text-gray-300 mt-2">Quick 3-question diagnostic on {topic.name}</p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-md p-6 mb-6">
-        <div className="bg-primary bg-opacity-10 p-4 rounded-lg mb-6">
-          <p className="text-center text-primary font-medium">This helps us personalize your learning path!</p>
+      <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-blue-900 border border-blue-800 p-4 rounded-lg mb-6">
+          <p className="text-center text-blue-100 font-medium">This helps us personalize your learning path!</p>
         </div>
 
         <DiagnosticQuestions
@@ -140,9 +142,9 @@ export default function DiagnosticTest() {
         />
       </div>
 
-      <div className="flex justify-between items-center text-sm text-neutral-500">
+      <div className="flex justify-between items-center text-sm text-gray-300">
         <span>Establishing your baseline</span>
-        <button onClick={handleSkipDiagnostic} className="text-primary font-medium">
+        <button onClick={handleSkipDiagnostic} className="text-blue-400 hover:text-blue-300 font-medium">
           Skip Diagnostic
         </button>
       </div>
@@ -156,39 +158,39 @@ export default function DiagnosticTest() {
     const percentage = Math.round((score / total) * 100);
     
     return (
-      <div className="min-h-screen flex flex-col p-6">
+      <div className="min-h-screen flex flex-col p-6 bg-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold font-heading text-primary">Diagnostic Complete</h1>
-          <p className="text-neutral-600 mt-2">We've analyzed your starting point</p>
+          <h1 className="text-2xl font-bold font-heading text-blue-400">Diagnostic Complete</h1>
+          <p className="text-gray-300 mt-2">We've analyzed your starting point</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-md p-6 mb-6">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-primary bg-opacity-10 mb-4">
-              <span className="text-primary text-4xl font-bold">{level}</span>
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-blue-900 border-2 border-blue-700 mb-4">
+              <span className="text-blue-200 text-4xl font-bold">{level}</span>
             </div>
-            <h2 className="text-xl font-heading font-bold">Starting Level</h2>
-            <p className="text-neutral-600 mt-1">{topic.name} - {level === 1 ? 'Beginner' : level === 2 ? 'Intermediate' : 'Advanced'}</p>
+            <h2 className="text-xl font-heading font-bold text-white">Starting Level</h2>
+            <p className="text-gray-300 mt-1">{topic.name} - {level === 1 ? 'Beginner' : level === 2 ? 'Intermediate' : 'Advanced'}</p>
           </div>
 
-          <div className="border-t border-neutral-200 pt-6 mb-6">
-            <h3 className="font-medium mb-2">Diagnostic Result</h3>
+          <div className="border-t border-gray-700 pt-6 mb-6">
+            <h3 className="font-medium mb-2 text-white">Diagnostic Result</h3>
             <div className="flex items-center mb-4">
-              <div className="w-full bg-neutral-200 rounded-full h-4">
+              <div className="w-full bg-gray-700 rounded-full h-4">
                 <div 
-                  className="bg-primary h-4 rounded-full" 
+                  className="bg-blue-600 h-4 rounded-full" 
                   style={{ width: `${percentage}%` }}
                 ></div>
               </div>
-              <span className="ml-4 font-bold">{score}/{total}</span>
+              <span className="ml-4 font-bold text-white">{score}/{total}</span>
             </div>
-            <p className="text-neutral-600 text-sm">
+            <p className="text-gray-300 text-sm">
               You got {score} out of {total} questions correct.
             </p>
           </div>
 
-          <div className="bg-accent bg-opacity-20 p-4 rounded-lg mb-6">
-            <p className="text-center text-neutral-700">
+          <div className="bg-blue-900 border border-blue-800 p-4 rounded-lg mb-6">
+            <p className="text-center text-blue-100">
               {percentage > 66 
                 ? "Great job! You're ready for more advanced content." 
                 : percentage > 33 
@@ -199,7 +201,7 @@ export default function DiagnosticTest() {
 
           <Button 
             onClick={handleStartLearning} 
-            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
           >
             Begin Your Learning Journey
           </Button>

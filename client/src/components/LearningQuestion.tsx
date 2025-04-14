@@ -48,19 +48,19 @@ export function LearningQuestion({
   };
   
   return (
-    <div className={`question-card bg-white rounded-xl shadow-md p-5 ${className}`}>
+    <div className={`question-card bg-gray-800 border border-gray-700 rounded-xl shadow-md p-5 ${className}`}>
       <div className="flex justify-between mb-4">
-        <span className="inline-block bg-accent text-neutral-800 font-medium px-3 py-1 rounded-full text-sm">
+        <span className="inline-block bg-blue-600 text-white font-medium px-3 py-1 rounded-full text-sm">
           Question {questionNumber}/{totalQuestions}
         </span>
         {accuracy !== undefined && (
-          <span className="inline-block bg-success bg-opacity-10 text-success font-medium px-3 py-1 rounded-full text-sm">
+          <span className="inline-block bg-green-600 text-white font-medium px-3 py-1 rounded-full text-sm">
             {accuracy}% Accuracy
           </span>
         )}
       </div>
 
-      <h2 className="text-lg font-medium mb-4">{question}</h2>
+      <h2 className="text-lg font-medium mb-4 text-white">{question}</h2>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
         {options.map((option) => (
@@ -68,8 +68,8 @@ export function LearningQuestion({
             key={option.id}
             className={`p-4 rounded-lg border-2 ${
               selectedOption === option.id 
-                ? 'border-primary text-primary' 
-                : 'border-neutral-300 hover:border-primary'
+                ? 'border-blue-400 bg-blue-900 text-white' 
+                : 'border-gray-600 bg-gray-700 text-white hover:border-blue-400 hover:bg-gray-600'
             } text-center font-medium`}
             onClick={() => handleOptionClick(option.id)}
           >
@@ -79,15 +79,15 @@ export function LearningQuestion({
       </div>
 
       {showHint && hint && (
-        <div className="bg-warning bg-opacity-10 p-4 rounded-lg mb-4">
-          <p className="text-neutral-700"><strong>Hint:</strong> {hint}</p>
+        <div className="bg-yellow-900 border border-yellow-700 p-4 rounded-lg mb-4">
+          <p className="text-yellow-100"><strong>Hint:</strong> {hint}</p>
         </div>
       )}
 
       {hint && !showHint ? (
         <button 
           onClick={handleHintClick} 
-          className="w-full border border-primary text-primary hover:bg-primary-light hover:text-white font-medium py-2 px-4 rounded-lg transition duration-200 mb-4"
+          className="w-full border border-yellow-500 bg-gray-700 text-yellow-300 hover:bg-gray-600 font-medium py-2 px-4 rounded-lg transition duration-200 mb-4"
         >
           Need a Hint?
         </button>
@@ -98,8 +98,8 @@ export function LearningQuestion({
         disabled={selectedOption === null}
         className={`w-full ${
           selectedOption === null 
-            ? 'bg-neutral-300 cursor-not-allowed' 
-            : 'bg-primary hover:bg-primary-dark'
+            ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+            : 'bg-blue-600 hover:bg-blue-700'
         } text-white font-bold py-3 px-4 rounded-lg transition duration-200`}
       >
         Submit Answer

@@ -107,10 +107,10 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       <div className="flex-1 flex">
         {/* Left side - Auth form */}
-        <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
+        <div className="w-full md:w-1/2 p-6 flex flex-col justify-center bg-gray-900">
           <div className="mb-8 text-center">
             <div className="h-16 bg-primary text-white flex items-center justify-center rounded-lg mb-4">
               <h1 className="text-2xl font-bold">Adhyai</h1>
@@ -126,10 +126,10 @@ export default function AuthPage() {
             </TabsList>
             
             <TabsContent value="student">
-              <Card>
+              <Card className="bg-gray-800 border border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-xl">Student Login</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-xl text-white">Student Login</CardTitle>
+                  <CardDescription className="text-gray-300">
                     Enter your credentials to access your learning dashboard
                   </CardDescription>
                 </CardHeader>
@@ -189,30 +189,30 @@ export default function AuthPage() {
                   </Button>
                   
                   <div className="relative flex items-center w-full my-2">
-                    <div className="flex-grow border-t border-neutral-300"></div>
-                    <span className="mx-4 text-neutral-600 text-sm">or</span>
-                    <div className="flex-grow border-t border-neutral-300"></div>
+                    <div className="flex-grow border-t border-gray-600"></div>
+                    <span className="mx-4 text-gray-300 text-sm">or</span>
+                    <div className="flex-grow border-t border-gray-600"></div>
                   </div>
                   
                   <Button 
                     variant="outline"
                     onClick={handleGoogleSignIn}
                     disabled={isGoogleLoading}
-                    className="w-full flex items-center justify-center gap-2 border border-neutral-300 py-3 px-4 rounded-lg hover:bg-neutral-50"
+                    className="w-full flex items-center justify-center gap-2 border border-gray-600 py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 text-white"
                   >
                     {isGoogleLoading ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
-                      <SiGoogle className="h-4 w-4 text-primary" />
+                      <SiGoogle className="h-4 w-4 text-blue-400" />
                     )}
                     Sign in with Google
                   </Button>
                   
-                  <p className="text-center text-neutral-500 text-sm mt-4">
+                  <p className="text-center text-gray-300 text-sm mt-4">
                     Don't have an account?{' '}
                     <button 
                       onClick={handleSignUpClick}
-                      className="text-primary font-medium hover:underline"
+                      className="text-blue-400 font-medium hover:underline"
                     >
                       Sign Up
                     </button>
@@ -222,10 +222,10 @@ export default function AuthPage() {
             </TabsContent>
             
             <TabsContent value="parent">
-              <Card>
+              <Card className="bg-gray-800 border border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-xl">Parent Login</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-xl text-white">Parent Login</CardTitle>
+                  <CardDescription className="text-gray-300">
                     Access your child's learning progress
                   </CardDescription>
                 </CardHeader>
@@ -286,21 +286,21 @@ export default function AuthPage() {
                   </Button>
                   
                   <div className="relative flex items-center w-full my-2">
-                    <div className="flex-grow border-t border-neutral-300"></div>
-                    <span className="mx-4 text-neutral-600 text-sm">or</span>
-                    <div className="flex-grow border-t border-neutral-300"></div>
+                    <div className="flex-grow border-t border-gray-600"></div>
+                    <span className="mx-4 text-gray-300 text-sm">or</span>
+                    <div className="flex-grow border-t border-gray-600"></div>
                   </div>
                   
                   <Button 
                     variant="outline"
                     onClick={handleGoogleSignIn}
                     disabled={isGoogleLoading}
-                    className="w-full flex items-center justify-center gap-2 border border-neutral-300 py-3 px-4 rounded-lg hover:bg-neutral-50"
+                    className="w-full flex items-center justify-center gap-2 border border-gray-600 py-3 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 text-white"
                   >
                     {isGoogleLoading ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
-                      <SiGoogle className="h-4 w-4 text-primary" />
+                      <SiGoogle className="h-4 w-4 text-blue-400" />
                     )}
                     Sign in with Google
                   </Button>
@@ -309,13 +309,13 @@ export default function AuthPage() {
             </TabsContent>
           </Tabs>
           
-          <div className="text-center text-neutral-500 text-sm mt-4">
-            <p>By continuing, you accept our <a href="#" className="text-primary">Terms</a> and <a href="#" className="text-primary">Privacy Policy</a></p>
+          <div className="text-center text-gray-300 text-sm mt-4">
+            <p>By continuing, you accept our <a href="#" className="text-blue-400 hover:text-blue-300">Terms</a> and <a href="#" className="text-blue-400 hover:text-blue-300">Privacy Policy</a></p>
           </div>
         </div>
         
         {/* Right side - Hero section */}
-        <div className="hidden md:block md:w-1/2 bg-primary">
+        <div className="hidden md:block md:w-1/2 bg-blue-600">
           <div className="flex flex-col items-center justify-center h-full p-8 text-white">
             <h2 className="text-3xl font-bold mb-6">Personalized Learning Journey</h2>
             <p className="text-lg mb-8 text-center">

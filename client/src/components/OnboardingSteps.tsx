@@ -56,6 +56,24 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
     }
   };
   
+  const handleGoogleSignUp = () => {
+    setIsGoogleLoading(true);
+    
+    // Simulate Google sign-in with a timeout
+    setTimeout(() => {
+      toast({
+        title: "Google Sign Up",
+        description: "Google sign-up functionality coming soon!",
+        variant: "default",
+      });
+      setIsGoogleLoading(false);
+    }, 1500);
+  };
+  
+  const handleLoginClick = () => {
+    setLocation('/auth');
+  };
+  
   const handleStep2Submit = async () => {
     try {
       const formValues = form.getValues();
@@ -212,13 +230,45 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 type="submit" 
                 className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg transition duration-200"
               >
-                Continue
+                Sign Up
               </Button>
             </form>
           </Form>
+          
+          <div className="relative flex items-center w-full my-6">
+            <div className="flex-grow border-t border-neutral-300"></div>
+            <span className="mx-4 text-neutral-600 text-sm">or</span>
+            <div className="flex-grow border-t border-neutral-300"></div>
+          </div>
+          
+          <Button 
+            variant="outline"
+            onClick={handleGoogleSignUp}
+            disabled={isGoogleLoading}
+            className="w-full flex items-center justify-center gap-2 border border-neutral-300 py-3 px-4 rounded-lg hover:bg-neutral-50"
+          >
+            {isGoogleLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <SiGoogle className="h-4 w-4 text-primary" />
+            )}
+            Sign up with Google
+          </Button>
+          
+          <div className="text-center mt-6">
+            <p className="text-neutral-600 text-sm">
+              Already have an account?{' '}
+              <button 
+                onClick={handleLoginClick}
+                className="text-primary font-medium hover:underline"
+              >
+                Sign In
+              </button>
+            </p>
+          </div>
         </div>
 
-        <div className="text-center text-neutral-500 text-sm">
+        <div className="text-center text-neutral-500 text-sm mt-4">
           <p>By continuing, you accept our <a href="#" className="text-primary">Terms</a> and <a href="#" className="text-primary">Privacy Policy</a></p>
         </div>
       </div>

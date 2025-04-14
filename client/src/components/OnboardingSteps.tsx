@@ -174,25 +174,23 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-white font-medium">Your Grade</FormLabel>
-                    <Select 
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <FormControl>
-                        <select 
-                          className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
-                          {...field}
-                        >
-                          <option value="6">Grade 6</option>
-                          <option value="7">Grade 7</option>
-                          <option value="8">Grade 8</option>
-                          <option value="9">Grade 9</option>
-                          <option value="10">Grade 10</option>
-                          <option value="11">Grade 11</option>
-                          <option value="12">Grade 12</option>
-                        </select>
-                      </FormControl>
-                    </Select>
+                    <div className="relative">
+                      <select
+                        className="w-full px-4 py-3 pr-10 rounded-lg border border-neutral-700 bg-gray-900 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        {...field}
+                      >
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-white">
+                        ▼
+                      </div>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -204,23 +202,17 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-white font-medium">Preferred Language</FormLabel>
-                    <Select 
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <FormControl>
-                        <select 
-                          className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
-                          {...field}
-                        >
-                          <option value="english">English</option>
-                          <option value="hindi">Hindi</option>
-                          <option value="tamil">Tamil</option>
-                          <option value="telugu">Telugu</option>
-                          <option value="marathi">Marathi</option>
-                        </select>
-                      </FormControl>
-                    </Select>
+                    <div className="relative">
+                      <select
+                        className="w-full px-4 py-3 pr-10 rounded-lg border border-neutral-700 bg-gray-900 text-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        {...field}
+                      >
+                        <option value="english">English</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-white">
+                        ▼
+                      </div>
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

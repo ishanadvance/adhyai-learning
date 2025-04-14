@@ -131,15 +131,15 @@ export default function Dashboard() {
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <span className="text-accent mr-2">⚡</span>
-              <span>Target: {user.weeklyGoalMinutes} minutes</span>
+              <span className="text-yellow-300 mr-2">⚡</span>
+              <span className="text-white font-medium">Daily Target: {user.weeklyGoalMinutes} minutes of learning</span>
             </div>
             {nextTopic && (
               <button 
                 onClick={() => handleStartTopic(nextTopic.id)} 
-                className="px-4 py-2 bg-white text-primary font-medium rounded-lg"
+                className="px-4 py-2 bg-blue-100 text-blue-900 font-bold rounded-lg border-2 border-white hover:bg-blue-200"
               >
-                Start
+                Start Learning
               </button>
             )}
           </div>

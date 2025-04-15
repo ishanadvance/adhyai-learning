@@ -31,8 +31,8 @@ export function LearningQuestion({
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const [wasCorrect, setWasCorrect] = useState<boolean | null>(null);
+  const [showHint, setShowHint] = useState(false);
 
-  // Assumes correct answer is tagged in option text like: "option text [correct]"
   const correctOption = options.find((o) => o.text.includes('[correct]'));
   const cleanedOptions = options.map(opt => ({
     ...opt,
@@ -55,46 +55,59 @@ export function LearningQuestion({
   };
 
   const handleHintClick = () => {
-    setShowHint(true);
+    setShowHint(!showHint); // Toggle hint
     onHintRequested();
   };
 
-  const [showHint, setShowHint] = useState(false);
-
   return (
-    <div className={`bg-white p-6 rounded-lg shadow ${className}`}>
+    <div className={`bg-gray-800 p-6 rounded-lg shadow text-white ${className}`}>
       <div className="mb-4">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-300">
           Question {questionNumber} of {totalQuestions}
         </p>
         <h2 className="text-lg font-semibold mb-2">{question}</h2>
       </div>
 
       <div className="space-y-3">
-        {cleanedOptions.map((option) => (
-          <button
-            key={option.id}
-            onClick={() => handleOptionClick(option.id)}
-            disabled={answerSubmitted}
-            className={`w-full text-left px-4 py-3 rounded-lg border transition-all ${
-              selectedOption === option.id
-                ? answerSubmitted
-                  ? option.id === correctOption?.id
-                    ? 'bg-green-100 border-green-500 text-green-800'
-                    : 'bg-red-100 border-red-500 text-red-800'
-                  : 'bg-blue-100 border-blue-500'
-                : 'bg-white border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            {option.text}
-          </button>
-        ))}
+        {cleanedOptions.map((option) => {
+          const isSelected = selectedOption === option.id;
+          const isCorrect = option.id === correctOption?.id;
+
+          let baseStyle = 'w-full text-left px-4 py-3 rounded-lg border transition-all';
+
+          if (answerSubmitted) {
+            if (isSelected && isCorrect) {
+              baseStyle += ' bg-green-700 border-green-500 text-white';
+            } else if (isSelected && !isCorrect) {
+              baseStyle += ' bg-red-700 border-red-500 text-white';
+            } else if (isCorrect) {
+              baseStyle += ' bg-green-900 border-green-400 text-white';
+            } else {
+              baseStyle += ' bg-gray-700 border-gray-600 text-white';
+            }
+          } else {
+            baseStyle += isSelected
+              ? ' bg-blue-700 border-blue-500 text-white'
+              : ' bg-gray-700 border-gray-600 hover:bg-gray-600 text-white';
+          }
+
+          return (
+            <button
+              key={option.id}
+              onClick={() => handleOptionClick(option.id)}
+              disabled={answerSubmitted}
+              className={baseStyle}
+            >
+              {option.text}
+            </button>
+          );
+        })}
       </div>
 
       <div className="mt-4 flex justify-between items-center">
         <button
           onClick={handleHintClick}
-          className="text-sm text-blue-500 hover:underline"
+          className="text-sm text-blue-400 hover:underline"
         >
           Need a hint?
         </button>
@@ -107,16 +120,17 @@ export function LearningQuestion({
         </button>
       </div>
 
+      {showHint && hint && (
+        <div className="mt-3 p-3 bg-gray-700 rounded-md text-sm text-gray-200">
+          Hint: {hint}
+        </div>
+      )}
+
       {answerSubmitted && (
         <div className="mt-4">
-          <p className={`font-medium ${wasCorrect ? 'text-green-600' : 'text-red-600'}`}>
-            {wasCorrect ? 'Correct!' : 'Oops, that was incorrect.'}
+          <p className={`font-medium ${wasCorrect ? 'text-green-400' : 'text-red-400'}`}>
+            {wasCorrect ? '✅ Correct!' : '❌ Oops, that was incorrect.'}
           </p>
-          {hint && (
-            <p className="text-sm text-gray-600 mt-2">
-              Explanation: {hint}
-            </p>
-          )}
         </div>
       )}
     </div>

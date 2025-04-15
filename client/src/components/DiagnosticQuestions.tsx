@@ -22,58 +22,78 @@ export function DiagnosticQuestions({
 }: DiagnosticQuestionsProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<boolean[]>([]);
-  const [showNextButton, setShowNextButton] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const [hintRequested, setHintRequested] = useState(false);
+  const [answered, setAnswered] = useState(false);
+  const [lastCorrect, setLastCorrect] = useState<boolean | null>(null);
 
   const currentQuestion = questions[currentQuestionIndex];
+  const options = currentQuestion.options.map((text, id) => ({ text, id }));
 
   const handleAnswer = (optionId: number) => {
     const isCorrect = optionId === currentQuestion.correctOption;
-    if (isCorrect) setScore(prev => prev + 1);
 
-    const updatedAnswers = [...userAnswers];
-    updatedAnswers[currentQuestionIndex] = isCorrect;
-    setUserAnswers(updatedAnswers);
+    if (isCorrect) setScore(score + 1);
+    setLastCorrect(isCorrect);
+    setAnswered(true);
+    setShowNext(true);
+  };
 
-    setShowNextButton(true);
+  const handleHintRequested = () => {
+    setHintRequested(true);
   };
 
   const handleNext = () => {
+    setHintRequested(false);
+    setAnswered(false);
+    setLastCorrect(null);
+    setShowNext(false);
+
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-      setShowNextButton(false);
+      setCurrentQuestionIndex(i => i + 1);
     } else {
       onComplete(score, questions.length);
     }
   };
 
-  const handleHintRequested = () => {
-    // Optional analytics
-  };
-
   if (!currentQuestion) return null;
 
-  const options = currentQuestion.options.map((text, id) => ({ text, id }));
-
   return (
-    <div className={className}>
+    <div className={`bg-white dark:bg-gray-900 p-6 rounded-lg shadow ${className}`}>
+      <div className="mb-4">
+        <h1 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">Let's check your knowledge</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Quick {questions.length}-question diagnostic on <strong>Fractions</strong>
+        </p>
+        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          This helps us personalize your learning path!
+        </p>
+      </div>
+
       <LearningQuestion
         questionNumber={currentQuestionIndex + 1}
         totalQuestions={questions.length}
         question={currentQuestion.text}
         options={options}
-        hint={currentQuestion.hint}
+        hint={hintRequested ? currentQuestion.hint : undefined}
         onAnswer={handleAnswer}
         onHintRequested={handleHintRequested}
+        className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
       />
 
-      {showNextButton && (
-        <div className="mt-4 text-center">
+      {answered && (
+        <div className={`mt-4 text-center font-semibold ${lastCorrect ? 'text-green-500' : 'text-red-500'}`}>
+          {lastCorrect ? '✅ Correct!' : `❌ Incorrect. Correct answer: ${currentQuestion.options[currentQuestion.correctOption]}`}
+        </div>
+      )}
+
+      {showNext && (
+        <div className="mt-6 text-center">
           <button
             onClick={handleNext}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition"
           >
-            {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next Question'}
+            {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Diagnostic'}
           </button>
         </div>
       )}

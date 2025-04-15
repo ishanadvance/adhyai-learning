@@ -18,51 +18,42 @@ interface DiagnosticQuestionsProps {
 export function DiagnosticQuestions({
   questions,
   onComplete,
-  className = '',
+  className = ''
 }: DiagnosticQuestionsProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState<boolean[]>([]);
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [wasCorrect, setWasCorrect] = useState<boolean | null>(null);
-  const [showHint, setShowHint] = useState(false);
+  const [showNextButton, setShowNextButton] = useState(false);
 
   const currentQuestion = questions[currentQuestionIndex];
-  if (!currentQuestion) return null;
 
   const handleAnswer = (optionId: number) => {
     const isCorrect = optionId === currentQuestion.correctOption;
-
-    if (isCorrect) setScore((prev) => prev + 1);
+    if (isCorrect) setScore(prev => prev + 1);
 
     const updatedAnswers = [...userAnswers];
     updatedAnswers[currentQuestionIndex] = isCorrect;
     setUserAnswers(updatedAnswers);
 
-    setWasCorrect(isCorrect);
-    setShowFeedback(true);
-    setShowHint(false);
+    setShowNextButton(true);
+  };
 
-    setTimeout(() => {
-      setShowFeedback(false);
-      setWasCorrect(null);
-
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex((prev) => prev + 1);
-      } else {
-        onComplete(score + (isCorrect ? 1 : 0), questions.length);
-      }
-    }, 1200);
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setShowNextButton(false);
+    } else {
+      onComplete(score, questions.length);
+    }
   };
 
   const handleHintRequested = () => {
-    setShowHint(true);
+    // Optional analytics
   };
 
-  const options = currentQuestion.options.map((text, id) => ({
-    text: id === currentQuestion.correctOption ? `${text} [correct]` : text,
-    id,
-  }));
+  if (!currentQuestion) return null;
+
+  const options = currentQuestion.options.map((text, id) => ({ text, id }));
 
   return (
     <div className={className}>
@@ -71,22 +62,19 @@ export function DiagnosticQuestions({
         totalQuestions={questions.length}
         question={currentQuestion.text}
         options={options}
-        hint={showHint ? currentQuestion.hint : undefined}
+        hint={currentQuestion.hint}
         onAnswer={handleAnswer}
         onHintRequested={handleHintRequested}
       />
 
-      {showFeedback && (
-        <div
-          className={`text-sm text-center font-semibold mt-3 ${
-            wasCorrect ? 'text-green-400' : 'text-red-400'
-          }`}
-        >
-          {wasCorrect
-            ? '✅ Correct!'
-            : `❌ Incorrect. Correct answer: ${
-                currentQuestion.options[currentQuestion.correctOption]
-              }`}
+      {showNextButton && (
+        <div className="mt-4 text-center">
+          <button
+            onClick={handleNext}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
+          >
+            {currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next Question'}
+          </button>
         </div>
       )}
     </div>

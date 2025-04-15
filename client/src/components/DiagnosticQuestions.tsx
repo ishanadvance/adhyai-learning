@@ -15,42 +15,55 @@ interface DiagnosticQuestionsProps {
   className?: string;
 }
 
-export function DiagnosticQuestions({ questions, onComplete, className = '' }: DiagnosticQuestionsProps) {
+export function DiagnosticQuestions({
+  questions,
+  onComplete,
+  className = '',
+}: DiagnosticQuestionsProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState<boolean[]>([]);
-  
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [wasCorrect, setWasCorrect] = useState<boolean | null>(null);
+  const [showHint, setShowHint] = useState(false);
+
   const currentQuestion = questions[currentQuestionIndex];
-  
+  if (!currentQuestion) return null;
+
   const handleAnswer = (optionId: number) => {
     const isCorrect = optionId === currentQuestion.correctOption;
-    
-    if (isCorrect) {
-      setScore(score + 1);
-    }
-    
-    const newUserAnswers = [...userAnswers];
-    newUserAnswers[currentQuestionIndex] = isCorrect;
-    setUserAnswers(newUserAnswers);
-    
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      // Finished all questions
-      onComplete(score + (isCorrect ? 1 : 0), questions.length);
-    }
+
+    if (isCorrect) setScore((prev) => prev + 1);
+
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentQuestionIndex] = isCorrect;
+    setUserAnswers(updatedAnswers);
+
+    setWasCorrect(isCorrect);
+    setShowFeedback(true);
+    setShowHint(false);
+
+    setTimeout(() => {
+      setShowFeedback(false);
+      setWasCorrect(null);
+
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } else {
+        onComplete(score + (isCorrect ? 1 : 0), questions.length);
+      }
+    }, 1200);
   };
-  
+
   const handleHintRequested = () => {
-    // Analytics for hint usage could be added here
+    setShowHint(true);
   };
-  
-  if (!currentQuestion) {
-    return null;
-  }
-  
-  const options = currentQuestion.options.map((text, id) => ({ text, id }));
-  
+
+  const options = currentQuestion.options.map((text, id) => ({
+    text: id === currentQuestion.correctOption ? `${text} [correct]` : text,
+    id,
+  }));
+
   return (
     <div className={className}>
       <LearningQuestion
@@ -58,10 +71,24 @@ export function DiagnosticQuestions({ questions, onComplete, className = '' }: D
         totalQuestions={questions.length}
         question={currentQuestion.text}
         options={options}
-        hint={currentQuestion.hint}
+        hint={showHint ? currentQuestion.hint : undefined}
         onAnswer={handleAnswer}
         onHintRequested={handleHintRequested}
       />
+
+      {showFeedback && (
+        <div
+          className={`text-sm text-center font-semibold mt-3 ${
+            wasCorrect ? 'text-green-400' : 'text-red-400'
+          }`}
+        >
+          {wasCorrect
+            ? '✅ Correct!'
+            : `❌ Incorrect. Correct answer: ${
+                currentQuestion.options[currentQuestion.correctOption]
+              }`}
+        </div>
+      )}
     </div>
   );
 }

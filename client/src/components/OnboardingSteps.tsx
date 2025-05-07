@@ -79,13 +79,14 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
       const formValues = form.getValues();
 
       await register({
-        name: formValues.name,
+        username: formValues.email, // quick fix: alias email to username
         email: formValues.email,
+        name: formValues.name,
         password: formValues.password,
         grade: parseInt(formValues.grade),
         language: formValues.language,
         weeklyGoalTopics: weeklyGoal,
-        weeklyGoalMinutes: 15, // Fixed at 15 mins per day for now
+        weeklyGoalMinutes: 15,
         currentSubject: subject
       });
 

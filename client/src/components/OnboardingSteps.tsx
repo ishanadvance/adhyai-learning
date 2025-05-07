@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const userInfoSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   grade: z.string().refine((val) => !isNaN(parseInt(val)), {
     message: "Please select a grade"
@@ -33,21 +33,21 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  
+
   const [weeklyGoal, setWeeklyGoal] = useState(3); // Default: 3 topics per week
   const [subject, setSubject] = useState('Mathematics'); // Default: Mathematics
-  
+
   const form = useForm<z.infer<typeof userInfoSchema>>({
     resolver: zodResolver(userInfoSchema),
     defaultValues: {
       name: '',
-      username: '',
+      email: '',
       password: '',
       grade: '8',
       language: 'english'
     }
   });
-  
+
   const handleStep1Submit = () => {
     if (form.formState.isValid) {
       setStep(2);
@@ -55,10 +55,10 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
       form.trigger();
     }
   };
-  
+
   const handleGoogleSignUp = () => {
     setIsGoogleLoading(true);
-    
+
     // Simulate Google sign-in with a timeout
     setTimeout(() => {
       toast({
@@ -69,18 +69,18 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
       setIsGoogleLoading(false);
     }, 1500);
   };
-  
+
   const handleLoginClick = () => {
     setLocation('/auth');
   };
-  
+
   const handleStep2Submit = async () => {
     try {
       const formValues = form.getValues();
-      
+
       await register({
         name: formValues.name,
-        username: formValues.username,
+        email: formValues.email,
         password: formValues.password,
         grade: parseInt(formValues.grade),
         language: formValues.language,
@@ -88,14 +88,14 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
         weeklyGoalMinutes: 15, // Fixed at 15 mins per day for now
         currentSubject: subject
       });
-      
+
       setStep(3);
       onComplete();
     } catch (error) {
       console.error('Registration error:', error);
     }
   };
-  
+
   const renderStep1 = () => (
     <div id="step1" className="min-h-screen flex flex-col p-6 bg-gray-900">
       <div className="mb-8 text-center">
@@ -127,16 +127,16 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white font-medium">Username</FormLabel>
+                    <FormLabel className="text-white font-medium">Email</FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Choose a username" 
+                        placeholder="Add your email" 
                         {...field} 
                         className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                       />
@@ -145,7 +145,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="password"
@@ -226,13 +226,13 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
               </Button>
             </form>
           </Form>
-          
+
           <div className="relative flex items-center w-full my-6">
             <div className="flex-grow border-t border-white/30"></div>
             <span className="mx-4 text-white text-sm">or</span>
             <div className="flex-grow border-t border-white/30"></div>
           </div>
-          
+
           <Button 
             variant="outline"
             onClick={handleGoogleSignUp}
@@ -246,7 +246,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
             )}
             Sign up with Google
           </Button>
-          
+
           <div className="text-center mt-6">
             <p className="text-white text-sm">
               Already have an account?{' '}
@@ -266,7 +266,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
       </div>
     </div>
   );
-  
+
   const renderStep2 = () => (
     <div id="step2" className="min-h-screen flex flex-col p-6 bg-gray-900">
       <div className="mb-8">
@@ -351,7 +351,7 @@ export function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
       </div>
     </div>
   );
-  
+
   switch (step) {
     case 1:
       return renderStep1();
